@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,11 +28,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <div className="App-intro">
             <h2>Posts</h2>
-            {posts.map(post =>
-              <div key={post.id}>
-                {post.subject}
-              </div>
-            )}
+            <Table>
+            	<thead>
+            		<th>Date</th>
+            		<th>Subject</th>
+            	</thead>
+	            {posts.map(post =>
+	              <tr key={post.id}>
+	              	<td>{new Date(post.creationDate).toLocaleDateString()} {new Date(post.creationDate).toLocaleTimeString()}</td>
+	                <td>{post.subject}</td>
+	              </tr>
+	            )}
+            </Table>
           </div>
         </header>
       </div>
