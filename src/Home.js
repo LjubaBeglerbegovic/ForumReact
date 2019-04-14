@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Table, Container } from 'reactstrap';
+import { Table, Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './App.css';
 
@@ -26,6 +26,7 @@ class Home extends Component {
       <div className="App">
       	<Container fluid>
 	        <h2>Posts</h2>
+	        <Button color="success" className="float-right" tag={Link} to="/post/new">New post</Button>
 	        <Table>
 	        	<thead>
 	        		<tr>

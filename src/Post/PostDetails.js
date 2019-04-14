@@ -69,7 +69,7 @@ class PostDetails extends Component{
 		
 		return <div className="container">
 			<h2>{item.subject}</h2>
-			<Input type="text" value={dateTime} readOnly/>
+			<Label>{dateTime}</Label>
 			<br/>
 			<Input type="textarea" value={item.message} readOnly/><br/>
 			{comments}
