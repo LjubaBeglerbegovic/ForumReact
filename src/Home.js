@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Table, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './App.css';
 
@@ -24,19 +24,25 @@ class Home extends Component {
 
     return (
       <div className="App">
-        <h2>Posts</h2>
-        <Table>
-        	<thead>
-        		<th>Date</th>
-        		<th>Subject</th>
-        	</thead>
-            {posts.map(post =>
-              <tr key={post.id}>
-              	<td>{new Date(post.creationDate).toLocaleDateString()} {new Date(post.creationDate).toLocaleTimeString()}</td>
-                <td><Link to={"/post/" + post.id}>{post.subject}</Link></td>
-              </tr>
-            )}
-        </Table>
+      	<Container fluid>
+	        <h2>Posts</h2>
+	        <Table>
+	        	<thead>
+	        		<tr>
+	        		<th>Date</th>
+	        		<th>Subject</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	            {posts.map(post =>
+	              <tr key={post.id}>
+	              	<td>{new Date(post.creationDate).toLocaleDateString()} {new Date(post.creationDate).toLocaleTimeString()}</td>
+	                <td><Link to={"/post/" + post.id}>{post.subject}</Link></td>
+	              </tr>
+	            )}
+	            </tbody>
+	        </Table>
+	        </Container>
       </div>
     );
   }
