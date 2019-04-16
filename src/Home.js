@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Table, Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './App.css';
+import AppNavbar from './AppNavbar';
 
 class Home extends Component {
   state = {
@@ -24,7 +25,8 @@ class Home extends Component {
 
     return (
       <div className="App">
-      	<Container fluid>
+      	<AppNavbar/>
+      	<Container>
 	        <h2>Posts</h2>
 	        <Button color="success" className="float-right" tag={Link} to="/post/new">New post</Button>
 	        <Table>

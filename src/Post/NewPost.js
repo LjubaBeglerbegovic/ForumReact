@@ -43,7 +43,7 @@ class NewPost extends Component{
 		const {post} = this.state;
 		
 		return <div className="container">
-		<Container fluid>
+		<Container >
 			<Form onSubmit={this.handleSubmit}>
 				<FormGroup>
 					<Label>Subject</Label>
