@@ -25,7 +25,7 @@ export default class AppNavbar extends Component {
             <NavLink tag={Link} to="/register">Sign up</NavLink>
           </NavItem>
           <NavItem>
-	          <NavLink tag={Link} to="/login">Sign in</NavLink>
+	          <NavLink tag={Link} to="/signin">Sign in</NavLink>
 	        </NavItem>
         </Nav>
       </Collapse>

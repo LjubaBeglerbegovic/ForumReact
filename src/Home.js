@@ -3,17 +3,22 @@ import { Table, Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './App.css';
 import AppNavbar from './AppNavbar';
+import Weather from './weather/Weather';
 
 class Home extends Component {
   state = {
     isLoading: true,
     posts: []
   };
-
+  
   async componentDidMount() {
     const response = await fetch('/forum/posts');
     const body = await response.json();
-    this.setState({ posts: body, isLoading: false });
+   
+    this.setState({ 
+    	posts: body, 
+    	isLoading: false
+    	});
   }
 
   render() {
@@ -27,6 +32,7 @@ class Home extends Component {
       <div className="App">
       	<AppNavbar/>
       	<Container>
+	        <Weather />
 	        <h2>Posts</h2>
 	        <Button color="success" className="float-right" tag={Link} to="/post/new">New post</Button>
 	        <Table>

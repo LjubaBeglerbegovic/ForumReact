@@ -41,7 +41,7 @@ class Register extends Component{
 			body: JSON.stringify(user)
 		}).then(res => console.log('response: ', res))
 		.catch(err => console.error('Caught error: ', err));
-		this.props.history.push('/login');
+		this.props.history.push('/signin');
 	}
 	
 	render(){

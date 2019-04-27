@@ -35,7 +35,7 @@ class NewPost extends Component{
 			},
 			body: JSON.stringify(post)
 		})
-		.then(res => console.log('response: ', res))
+		.then(this.props.history.push('/'))
 		.catch(err => console.error('Caught error: ', err));
 	}
 	
