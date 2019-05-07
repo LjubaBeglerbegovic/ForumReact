@@ -67,10 +67,12 @@ class PostDetails extends Component{
 			</div>
 		});
 		
+		const imageFile = item.image;
 		return <div className="container">
 			<h2>{item.subject}</h2>
 			<Label>{dateTime}</Label>
 			<br/>
+			<div className="container" style={{padding: 10}}><img src={`data:image/*;base64,${imageFile}`} style={{height: 300, justifyContent: 'center', alignItems: 'center'}} alt=""/></div>
 			<Input type="textarea" value={item.message} readOnly/><br/>
 			{comments}
 			<Form onSubmit={this.handleCommentSubmit}>

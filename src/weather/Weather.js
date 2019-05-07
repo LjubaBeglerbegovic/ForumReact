@@ -13,7 +13,6 @@ class Weather extends React.Component {
 	async componentDidMount(){
 		const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=novi%20sad,%20rs&appid=416885897f6909f475ac639b0505f451`); 
 		const responseWeather = await api_call.json();
-		console.log(responseWeather);
 		this.setState({
 			city: responseWeather.name,
 	    	country: responseWeather.sys.country,

@@ -10,9 +10,12 @@ class NewPost extends Component{
 				post:{
 					subject:'',
 					message: ''
-				}
+				},
+				file:null,
+				imagePreviewUrl: ''
 		};
 		this.handleChange = this.handleChange.bind(this);
+		this.handleImageChange = this.handleImageChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
@@ -25,6 +28,21 @@ class NewPost extends Component{
 	    this.setState({post});
 	  }
 	
+	async handleImageChange(event) {
+		event.preventDefault();
+
+	    let reader = new FileReader();
+	    let file = event.target.files[0];
+
+	    reader.onloadend = () => {
+	      this.setState({
+	    	file:file,
+	        imagePreviewUrl: reader.result
+	      });
+	    }	    
+	    reader.readAsDataURL(file);
+	  }
+	
 	async handleSubmit(event){
 		const {post} = this.state;
 		await fetch(`/forum/post`, {
@@ -35,12 +53,33 @@ class NewPost extends Component{
 			},
 			body: JSON.stringify(post)
 		})
+		.then(res => {
+			res.json().then(json => {
+				const {file} = this.state;
+				let data = new FormData();
+			    data.append('file', file);
+			    data.append('name', file.name);
+
+				fetch(`/forum/post/${json.id}/image`, {
+					method: 'POST',
+					body: data
+				})
+			    });
+			 
+		})
 		.then(this.props.history.push('/'))
 		.catch(err => console.error('Caught error: ', err));
 	}
 	
 	render(){
 		const {post} = this.state;
+		let {imagePreviewUrl} = this.state;
+	    let $imagePreview = null;
+	    if (imagePreviewUrl) {
+	      $imagePreview = (<img src={imagePreviewUrl} style={{height: 300}} alt="Post"/>);
+	    } else {
+	      $imagePreview = (<div className="previewText">No image selected.</div>);
+	    }
 		
 		return <div className="container">
 		<Container >
@@ -49,10 +88,16 @@ class NewPost extends Component{
 					<Label>Subject</Label>
 					<Input name="subject" id="subject" value={post.subject} onChange={this.handleChange} />
 				</FormGroup>
+				<div className="imgPreview" style={{padding:10}}>
+		          {$imagePreview}
+		        </div>
 				<FormGroup>
 					<Label>Post</Label>
 					<Input type="textarea" name="message" id="message" value={post.message} onChange={this.handleChange} />
 				</FormGroup>
+				<FormGroup>
+		        	<Input className="fileInput" type="file" name="file" id="file" onChange={this.handleImageChange}/>
+		        </FormGroup>
 				<FormGroup>
 		            <Button color="primary" type="submit">Save</Button>{' '}
 		            <Button color="secondary" tag={Link} to="/">Cancel</Button>
